@@ -38,7 +38,7 @@ def login_support_team(request):
         try:
             support_team = SupportTeam.objects.get(email=email, password=password)
             request.session['support_id']= support_team.id
-            return render(request, 'manage_requests.html')
+            return redirect('manage_requests')
         except SupportTeam.DoesNotExist:
             return render(request, 'login_support_team.html',{'error':'Invalid Credentials'})
         
@@ -56,6 +56,7 @@ def logout_support_team(request):
 
 def login_support_team_required(view_func):
     def wrapper(request, *args, **kwargs):
+        print(f"Support ID in session: {request.session.get('support_id')}")
         if not request.session.get('support_id'):
             return redirect('/customer_service/login_support_team/') 
         return view_func(request, *args, **kwargs)
@@ -84,6 +85,7 @@ def resolve_request(request, request_id):
 def manage_requests(request):
     # service_requests = ServiceRequest.objects.filter(status='Pending')
     service_requests = ServiceRequest.objects.all()
+    print(f"Fetched requests: {service_requests}") 
     return render(request, 'manage_requests.html', {'service_requests': service_requests})
 
 
