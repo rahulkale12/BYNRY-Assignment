@@ -1,0 +1,27 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Track My Service Requests</h2>
+
+  {% if service_requests %}
+    <ul>
+      {% for service_request in service_requests %}
+        <li>
+          <p><strong>Request ID:</strong> {{ service_request.id }}</p>
+          <p><strong>Service Type:</strong> {{ service_request.get_service_type_display }}</p>
+          <p><strong>Request Details:</strong> {{ service_request.details }}</p>
+          <p><strong>Status:</strong> {{ service_request.status }}</p>
+          <p><strong>Date Submitted:</strong> {{ service_request.request_date }}</p>
+          {% if service_request.resolved_date %}
+            <p><strong>Date Resolved:</strong> {{ service_request.resolved_date }}</p>
+          {% endif %}
+          <hr>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have no service requests.</p>
+  {% endif %}
+
+  <a href="{% url 'view_account' %}">Go to My Account</a>
+{% endblock %}

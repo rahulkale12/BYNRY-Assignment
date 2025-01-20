@@ -1,0 +1,20 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Resolve Service Request</h2>
+
+  <p><strong>Request ID:</strong> {{ service_request.id }}</p>
+  <p><strong>Service Type:</strong> {{ service_request.get_service_type_display }}</p>
+  <p><strong>Details:</strong> {{ service_request.details }}</p>
+  <p><strong>File Attachment:</strong> {% if service_request.file_attachment %}<a href="{{ service_request.file_attachment.url }}" target="_blank">Download</a>{% else %}None{% endif %}</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <div>
+      <label for="status">Mark as Resolved:</label>
+      <button type="submit">Resolve</button>
+    </div>
+  </form>
+
+  <a href="{% url 'manage_requests' %}">Back to Manage Requests</a>
+{% endblock %}

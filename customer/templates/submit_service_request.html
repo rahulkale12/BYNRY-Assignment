@@ -1,0 +1,27 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Submit Service Request</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+      <label for="service_type">Service Type:</label>
+      <select name="service_type" id="service_type" required>
+        <option value="gas_leak">Gas Leak</option>
+        <option value="bill_issue">Bill Issue</option>
+        <option value="installation">Installation</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div>
+      <label for="details">Request Details:</label>
+      <textarea name="details" id="details" required></textarea>
+    </div>
+    <div>
+      <label for="file_attachment">Attachment (Optional):</label>
+      <input type="file" name="file_attachment" id="file_attachment" />
+    </div>
+    <button type="submit">Submit Request</button>
+  </form>
+{% endblock %}

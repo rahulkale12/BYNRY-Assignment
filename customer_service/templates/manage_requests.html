@@ -1,0 +1,18 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Manage Service Requests</h2>
+
+  <ul>
+    {% for service_request in service_requests %}
+      <li>
+        <p><strong>Request ID:</strong> {{ service_request.id }} | 
+           <strong>Service Type:</strong> {{ service_request.get_service_type_display }} | 
+           <strong>Status:</strong> {{ service_request.status }}</p>
+        <a href="{% url 'resolve_request' request_id=service_request.id %}">Resolve Request</a>
+      </li>
+    {% empty %}
+      <p>No pending requests.</p>
+    {% endfor %}
+  </ul>
+{% endblock %}

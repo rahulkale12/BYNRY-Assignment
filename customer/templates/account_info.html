@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Account Information</h2>
+
+  <p><strong>Name:</strong> {{ customer.name }}</p>
+  <p><strong>Email:</strong> {{ customer.email }}</p>
+  <p><strong>Phone:</strong> {{ customer.phone }}</p>
+
+  <a href="{% url 'submit_request' %}">Submit a Service Request</a>
+  <a href="{% url 'logout_customer' %}">Logout</a>
+  <a href="{% url 'track_request' %}">My Request</a>
+{% endblock %}
